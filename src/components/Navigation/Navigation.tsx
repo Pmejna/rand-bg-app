@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import React, {useContext} from 'react';
+import { styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,18 +9,27 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import {ColorModeContext, modeColors} from '../../context/ColorModeContext';
+import SvgIcon from '../SvgIcons/SvgIcon';
 
 const drawerOpenWidth = 180;
 const drawerClosedWidth = 70;
+
+interface IAppBarProps extends MuiAppBarProps {
+  open?: boolean;
+  mode?: string;
+}
+
+interface IDrawerHeaderProps {
+  open?: boolean;
+}
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
@@ -43,18 +52,12 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   }),
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-interface DrawerHeaderProps {
-  open?: boolean;
-}
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+})<IAppBarProps>(({ theme, open, mode }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  backgroundColor: "transparent",
+  boxShadow: "none",
   marginLeft: drawerClosedWidth, 
     width: `calc(100% - 70px)`,
   transition: theme.transitions.create(['margin', 'width'], {
@@ -73,7 +76,7 @@ const AppBar = styled(MuiAppBar, {
 
 const DrawerHeader = styled('div',{
   shouldForwardProp: (prop) => prop !== 'open',
-})<DrawerHeaderProps>(({ theme, open }) => ({
+})<IDrawerHeaderProps>(({ theme, open }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -87,16 +90,13 @@ const DrawerHeader = styled('div',{
   ...(open && {
     marginLeft: drawerOpenWidth,
     width: `calc(100% - ${drawerOpenWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    
   }),
 }));
 
 const DrawerBody = styled(Drawer,{
   shouldForwardProp: (prop) => prop !== 'open',
-})<DrawerHeaderProps>(({ theme, open }) => ({
+})<IDrawerHeaderProps>(({ theme, open }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -116,9 +116,10 @@ const DrawerBody = styled(Drawer,{
   }),
 }));
 
-export default function PersistentDrawerLeft(props: any) {
+export default function Navigation(props: any) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const {mode, toggleColorMode} = useContext(ColorModeContext);
 
   const handleDrawerToggle = (): void => {
     setOpen(!open);
@@ -127,18 +128,28 @@ export default function PersistentDrawerLeft(props: any) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
+      <AppBar 
+        position="fixed" 
+        open={open} 
+        mode={mode}
+        sx={{background: 'transparent'}}
+      >
+        <Toolbar style={{justifyContent: "flex-end"}}>
+          <SvgIcon
+            aria-label="open drawer"
+            onClick={toggleColorMode}
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+          </SvgIcon>
           {/* <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
+            onClick={toggleColorMode}
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon />
+            gfdg
           </IconButton> */}
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" color="primary">
             Logo
           </Typography>
         </Toolbar>

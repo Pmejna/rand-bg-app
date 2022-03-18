@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {createTheme, CssBaseline} from "@mui/material";
 import './App.css';
 import Home from './pages/Home';
 import { ThemeProvider } from '@emotion/react';
 import Navigation from './components/Navigation/Navigation';
+import { ColorModeContextProvider } from './context/ColorModeContext';
 
 export const App: React.FC = (): JSX.Element => {
-  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
-  const theme = createTheme({
-    palette: {
-      mode: themeMode,
-    },
-    typography: {
-      fontSize: 14
-    }
-  })
+
   return(
-    <ThemeProvider theme={theme}>
+    <ColorModeContextProvider>
       <CssBaseline />
       <Navigation>
         <BrowserRouter>
@@ -28,7 +21,7 @@ export const App: React.FC = (): JSX.Element => {
           </Routes>
         </BrowserRouter>
       </Navigation>
-    </ThemeProvider>
+    </ColorModeContextProvider>
     )
 }
 
