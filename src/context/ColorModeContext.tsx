@@ -73,7 +73,7 @@ export const ColorModeContextProvider: FC<Props> = ({children}) => {
                     }
                 } : {
                     primary: {
-                        main: '#5cbc63',
+                        main: '#FCFBFF',
                         contrastText: '#fff'
                     },
                     secondary: {
