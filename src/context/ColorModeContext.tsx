@@ -11,6 +11,7 @@ import "@mui/material/styles/createPalette";
 declare module "@mui/material/styles/createPalette" {
   interface CommonColors {
     iconColor: string;
+    drawerBgColor: string;
   }
 }
 
@@ -22,7 +23,7 @@ export const modeColors = {
     bgMainDark: "#181827",
     bgSideBarDark: "#262033",
     iconLight: "#4C50C9",
-    iconDark: "#4B7BFE"
+    iconDark: "#3946FF"
 }
 
 interface IColorModeContext {
@@ -61,11 +62,15 @@ export const ColorModeContextProvider: FC<Props> = ({children}) => {
                         contrastText: '#fff',
                     },
                     common: {
-                        iconColor: modeColors.iconLight
+                        iconColor: modeColors.iconLight,
+                        drawerBgColor: modeColors.bgSideBarLight
                     },
                     secondary: {
                         main: "#000"
                     },
+                    background: {
+                        default: modeColors.bgMainLight
+                    }
                 } : {
                     primary: {
                         main: '#5cbc63',
@@ -75,8 +80,12 @@ export const ColorModeContextProvider: FC<Props> = ({children}) => {
                         main: "#000"
                     },
                     common: {
-                        iconColor: modeColors.iconDark
+                        iconColor: modeColors.iconDark,
+                        drawerBgColor: modeColors.bgSideBarDark
                     },
+                    background: {
+                        default: modeColors.bgMainDark
+                    }
                 }),
                 
             },

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -9,8 +9,6 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -18,6 +16,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {ColorModeContext, modeColors} from '../../context/ColorModeContext';
 import SvgIcon from '../SvgIcons/SvgIcon';
+import ThemeModeButton from '../ThemeModeButton/ThemeModeButton';
 
 const drawerOpenWidth = 180;
 const drawerClosedWidth = 70;
@@ -37,16 +36,16 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   flexGrow: 1,
   padding: theme.spacing(3),
   // width: `calc(100% - 70px)`,
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  // transition: theme.transitions.create(['margin', 'width'], {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
   marginLeft: `0`,
   ...(open && {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    // transition: theme.transitions.create(['margin', 'width'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
     // width: `calc(100% - ${drawerOpenWidth}px)`,
     marginLeft: 0,
   }),
@@ -60,17 +59,17 @@ const AppBar = styled(MuiAppBar, {
   boxShadow: "none",
   marginLeft: drawerClosedWidth, 
     width: `calc(100% - 70px)`,
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  // transition: theme.transitions.create(['margin', 'width'], {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
   ...(open && {
     marginLeft: drawerOpenWidth,
     width: `calc(100% - ${drawerOpenWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    // transition: theme.transitions.create(['margin', 'width'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
   }),
 }));
 
@@ -80,16 +79,21 @@ const DrawerHeader = styled('div',{
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
+  marginLeft: '12px',
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  justifyContent: 'flex-start',
+  // transition: theme.transitions.create(['margin', 'width'], {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
   ...(open && {
-    marginLeft: drawerOpenWidth,
-    width: `calc(100% - ${drawerOpenWidth}px)`,
+    marginLeft: '12px',
+    // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
+    // width: `calc(100% - ${drawerOpenWidth}px)`,
     
   }),
 }));
@@ -103,16 +107,16 @@ const DrawerBody = styled(Drawer,{
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
+  //   easing: theme.transitions.easing.sharp,
+  //   duration: theme.transitions.duration.leavingScreen,
+  // }),
   ...(open && {
     width: `calc(100% - ${drawerOpenWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
+    //   easing: theme.transitions.easing.sharp,
+    //   duration: theme.transitions.duration.enteringScreen,
+    // }),
   }),
 }));
 
@@ -120,6 +124,7 @@ export default function Navigation(props: any) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const {mode, toggleColorMode} = useContext(ColorModeContext);
+  // const {mode, toggleColorMode} = useContext(ColorModeContext);
 
   const handleDrawerToggle = (): void => {
     setOpen(!open);
@@ -135,23 +140,7 @@ export default function Navigation(props: any) {
         sx={{background: 'transparent'}}
       >
         <Toolbar style={{justifyContent: "flex-end"}}>
-          <SvgIcon
-            aria-label="open drawer"
-            onClick={toggleColorMode}
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-          </SvgIcon>
-          {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleColorMode}
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            gfdg
-          </IconButton> */}
-          <Typography variant="h6" noWrap component="div" color="primary">
-            Logo
-          </Typography>
+          <ThemeModeButton />
         </Toolbar>
       </AppBar>
       <DrawerBody
@@ -161,15 +150,38 @@ export default function Navigation(props: any) {
           '& .MuiDrawer-paper': {
             width: open ? drawerOpenWidth : drawerClosedWidth,
             boxSizing: 'border-box',
+            backgroundColor: theme.palette.common.drawerBgColor,
+            border: 'none'
           },
         }}
         variant="permanent"
         open={open}
       >
-        <DrawerHeader open={open}>
-          <IconButton onClick={handleDrawerToggle}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+        <DrawerHeader open={open} sx={{bg: 'transparent'}}>
+          {
+          open
+            ?
+              (<SvgIcon
+                onClick={handleDrawerToggle}
+                icon={'menuOpen'}
+                sx={{
+                  height: 80,
+                  width: 'auto',
+                }}
+              ></SvgIcon>)
+            : 
+              (<SvgIcon
+              onClick={handleDrawerToggle}
+              icon={'menuClosed'}
+              sx={{
+                height: 80,
+                width: 'auto',
+              }}
+              ></SvgIcon>)
+          }
+          <Typography sx={{display: open ? 'inline-block' : 'none', marginLeft: '12px', fontSize: '14px'}}>
+            Minimize
+          </Typography>
         </DrawerHeader>
         <List>
           {['Admin', 'Products', 'Sales', 'Orders'].map((text, index) => (
@@ -179,6 +191,7 @@ export default function Navigation(props: any) {
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
                 px: 2.5,
+                overflowX: 'hidden',
               }}
             >
               <ListItemIcon
@@ -197,7 +210,6 @@ export default function Navigation(props: any) {
             </ListItemButton>
           ))}
         </List>
-        <Divider />
       </DrawerBody>
       <Main open={open}>
         <DrawerHeader />

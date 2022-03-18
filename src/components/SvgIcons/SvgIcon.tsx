@@ -1,6 +1,6 @@
 import React from 'react';
 import {FunctionComponent, ReactNode} from 'react';
-import { SxProps, Theme, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { ReactElement, SVGProps } from "react";
 
 declare module 'react' {
@@ -13,7 +13,7 @@ declare module 'react' {
 interface ISvgIconProps {
     icon?: string,
     onClick: React.MouseEventHandler<SVGSVGElement>
-    sx: object;
+    sx?: object;
 }
 
 const Grid: FunctionComponent = () => {
@@ -69,6 +69,30 @@ const Picture: FunctionComponent = () => {
     )
 }
 
+const MenuOpen: FunctionComponent = () => {
+  const theme = useTheme();
+
+  return (
+    <g id="Group_10" data-name="Group 10" transform="translate(-73 -34)">
+      <rect id="Rectangle_58" data-name="Rectangle 58" width="28" height="8" rx="4" transform="translate(73 42)" fill={theme.palette.common.iconColor}/>
+      <rect id="Rectangle_59" data-name="Rectangle 59" width="28" height="5" rx="2.5" transform="translate(73 34)" fill={theme.palette.common.iconColor}/>
+      <rect id="Rectangle_57" data-name="Rectangle 57" width="28" height="5" rx="2.5" transform="translate(73 53)" fill={theme.palette.common.iconColor}/>
+  </g>
+  )
+}
+
+const MenuClosed: FunctionComponent = () => {
+  const theme = useTheme();
+
+  return (
+    <g id="Group_10" data-name="Group 10" transform="translate(-70 -34)">
+      <rect id="Rectangle_58" data-name="Rectangle 58" width="28" height="8" rx="4" transform="translate(73 42)" fill={theme.palette.common.iconColor}/>
+      <rect id="Rectangle_59" data-name="Rectangle 59" width="10" height="5" rx="2.5" transform="translate(70 34)" fill={theme.palette.common.iconColor}/>
+      <rect id="Rectangle_57" data-name="Rectangle 57" width="11" height="5" rx="2.5" transform="translate(92 53)" fill={theme.palette.common.iconColor}/>
+    </g>
+  )
+}
+
 const SvgIcon: React.FC<ISvgIconProps>= ({icon, onClick, sx}) => {
 
     let svgIcon: null | ReactNode = null;
@@ -78,6 +102,12 @@ const SvgIcon: React.FC<ISvgIconProps>= ({icon, onClick, sx}) => {
         break;
         case "picture":
             svgIcon = <Picture/>
+        break;
+        case "menuOpen":
+            svgIcon = <MenuOpen/>
+        break;
+        case "menuClosed":
+            svgIcon = <MenuClosed/>
         break;
         default:
             svgIcon = <Grid/>
