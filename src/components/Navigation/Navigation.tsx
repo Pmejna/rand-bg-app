@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { styled, useTheme} from '@mui/material/styles';
+import { styled, SxProps, useTheme, Theme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,25 +28,16 @@ interface IAppBarProps extends MuiAppBarProps {
 
 interface IDrawerHeaderProps {
   open?: boolean;
+  sx?: SxProps<Theme>
 }
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
+    open?: boolean;
+  }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
-  // width: `calc(100% - 70px)`,
-  // transition: theme.transitions.create(['margin', 'width'], {
-  //   easing: theme.transitions.easing.sharp,
-  //   duration: theme.transitions.duration.leavingScreen,
-  // }),
   marginLeft: `0`,
   ...(open && {
-    // transition: theme.transitions.create(['margin', 'width'], {
-    //   easing: theme.transitions.easing.sharp,
-    //   duration: theme.transitions.duration.enteringScreen,
-    // }),
-    // width: `calc(100% - ${drawerOpenWidth}px)`,
     marginLeft: 0,
   }),
 }));
@@ -59,17 +50,9 @@ const AppBar = styled(MuiAppBar, {
   boxShadow: "none",
   marginLeft: drawerClosedWidth, 
     width: `calc(100% - 70px)`,
-  // transition: theme.transitions.create(['margin', 'width'], {
-  //   easing: theme.transitions.easing.sharp,
-  //   duration: theme.transitions.duration.leavingScreen,
-  // }),
   ...(open && {
     marginLeft: drawerOpenWidth,
     width: `calc(100% - ${drawerOpenWidth}px)`,
-    // transition: theme.transitions.create(['margin', 'width'], {
-    //   easing: theme.transitions.easing.sharp,
-    //   duration: theme.transitions.duration.enteringScreen,
-    // }),
   }),
 }));
 
@@ -83,18 +66,8 @@ const DrawerHeader = styled('div',{
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-start',
-  // transition: theme.transitions.create(['margin', 'width'], {
-  //   easing: theme.transitions.easing.sharp,
-  //   duration: theme.transitions.duration.leavingScreen,
-  // }),
   ...(open && {
     marginLeft: '12px',
-    // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
-    //   easing: theme.transitions.easing.sharp,
-    //   duration: theme.transitions.duration.enteringScreen,
-    // }),
-    // width: `calc(100% - ${drawerOpenWidth}px)`,
-    
   }),
 }));
 
@@ -107,16 +80,9 @@ const DrawerBody = styled(Drawer,{
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
-  // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
-  //   easing: theme.transitions.easing.sharp,
-  //   duration: theme.transitions.duration.leavingScreen,
-  // }),
+
   ...(open && {
     width: `calc(100% - ${drawerOpenWidth}px)`,
-    // transition: theme.transitions.create(['margin', 'width', 'opacity'], {
-    //   easing: theme.transitions.easing.sharp,
-    //   duration: theme.transitions.duration.enteringScreen,
-    // }),
   }),
 }));
 
@@ -124,8 +90,6 @@ export default function Navigation(props: any) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const {mode, toggleColorMode} = useContext(ColorModeContext);
-  // const {mode, toggleColorMode} = useContext(ColorModeContext);
-
   const handleDrawerToggle = (): void => {
     setOpen(!open);
   };
@@ -157,26 +121,19 @@ export default function Navigation(props: any) {
         variant="permanent"
         open={open}
       >
-        <DrawerHeader open={open} sx={{bg: 'transparent'}}>
+        <DrawerHeader open={open} sx={{backgroundColor: 'transparent'}}>
           {
           open
             ?
               (<SvgIcon
                 onClick={handleDrawerToggle}
                 icon={'menuOpen'}
-                sx={{
-                  height: 80,
-                  width: 'auto',
-                }}
-              ></SvgIcon>)
+               >
+               </SvgIcon>)
             : 
               (<SvgIcon
-              onClick={handleDrawerToggle}
-              icon={'menuClosed'}
-              sx={{
-                height: 80,
-                width: 'auto',
-              }}
+                onClick={handleDrawerToggle}
+                icon={'menuClosed'}
               ></SvgIcon>)
           }
           <Typography sx={{display: open ? 'inline-block' : 'none', marginLeft: '12px', fontSize: '14px'}}>

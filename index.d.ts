@@ -3,4 +3,5 @@ declare module 'react' {
       // For theme-ui
       sx?: object;
     }
-  }
+ }
+

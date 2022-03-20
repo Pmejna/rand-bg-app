@@ -2,18 +2,19 @@ import React from 'react';
 import {FunctionComponent, ReactNode} from 'react';
 import { useTheme } from '@mui/material/styles';
 import { ReactElement, SVGProps } from "react";
+import { SxProps, Theme } from '@mui/material/styles';
 
 declare module 'react' {
     interface SVGProps<T> {
       // For theme-ui
-      sx?: object;
+      sx?: SxProps<Theme>;
     }
   }
 
 interface ISvgIconProps {
     icon?: string,
     onClick: React.MouseEventHandler<SVGSVGElement>
-    sx?: object;
+    sx?: SxProps<Theme>;
 }
 
 const Grid: FunctionComponent = () => {
@@ -113,8 +114,16 @@ const SvgIcon: React.FC<ISvgIconProps>= ({icon, onClick, sx}) => {
             svgIcon = <Grid/>
     }
     return (
-        <svg onClick={onClick} sx={sx} xmlns="http://www.w3.org/2000/svg" width="34" height="25" viewBox="0 0 34 25">
-            {svgIcon}
+        <svg 
+          onClick={onClick} 
+          sx={sx} 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="34" 
+          height="25" 
+          viewBox="0 0 34 25"
+          style={{cursor: 'pointer'}}
+        >
+          {svgIcon}
         </svg>
     )
 }

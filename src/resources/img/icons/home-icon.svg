@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38.57" height="27.669" viewBox="0 0 38.57 27.669">
+  <g id="Group_17" data-name="Group 17" transform="translate(-24.637 -137.331)">
+    <g id="Group_13" data-name="Group 13" transform="translate(27.67 146.691)">
+      <g id="Group_4" data-name="Group 4" transform="translate(0)">
+        <g id="Rectangle_21" data-name="Rectangle 21" transform="translate(0.33 0.309)" fill="none" stroke="#4c50c9" stroke-width="2">
+          <rect width="32" height="18" rx="4" stroke="none"/>
+          <rect x="1" y="1" width="30" height="16" rx="3" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <path id="Path_13" data-name="Path 13" d="M2020.25,149.49,2038.718,139l17.365,10.49" transform="translate(-1994.25 -0.51)" fill="none" stroke="#4c50c9" stroke-linecap="round" stroke-width="2"/>
+    <g id="Rectangle_60" data-name="Rectangle 60" transform="translate(33 151)" fill="#fff" stroke="#4c50c9" stroke-width="2">
+      <rect width="11" height="7" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="9" height="5" rx="1" fill="none"/>
+    </g>
+    <g id="Rectangle_61" data-name="Rectangle 61" transform="translate(47 151)" fill="#fff" stroke="#4c50c9" stroke-width="2">
+      <rect width="8" height="11" rx="2" stroke="none"/>
+      <rect x="1" y="1" width="6" height="9" rx="1" fill="none"/>
+    </g>
+    <path id="Path_14" data-name="Path 14" d="M2042,139.143h4.857v4.143" transform="translate(-1989 0.449)" fill="none" stroke="#4c50c9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>
